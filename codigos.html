@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Executar Algoritmos</title>
+</head>
+<body>
+    <h1>Executar Algoritmos</h1>
+    <form>
+        <fieldset>
+            <legend>Selecione o Algoritmo</legend>
+            <label>
+                <input type="radio" name="algoritmo" value="contagem" checked>
+                Contagem
+            </label>
+            <label>
+                <input type="radio" name="algoritmo" value="somatorio">
+                Somatório
+            </label>
+            <label>
+                <input type="radio" name="algoritmo" value="fibonacci">
+                Fibonacci
+            </label>
+            <label>
+                <input type="radio" name="algoritmo" value="mdc">
+                Máximo Divisor Comum (MDC)
+            </label>
+            <label>
+                <input type="radio" name="algoritmo" value="primo">
+                Número Primo
+            </label>
+            <label>
+                <input type="radio" name="algoritmo" value="ordenacao">
+                Ordenação
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Parâmetros</legend>
+            <label>
+                Número:
+                <input type="number" name="numero" required>
+            </label>
+            <label>
+                Número 2:
+                <input type="number" name="numero2">
+            </label>
+            <label>
+                Lista de Números:
+                <input type="text" name="lista" placeholder="1, 2, 3">
+            </label>
+        </fieldset>
+        <button type="button" onclick="executar()">Executar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function executar() {
+            const algoritmo = document.querySelector('input[name="algoritmo"]:checked').value;
+            const numero = parseInt(document.querySelector('input[name="numero"]').value);
+            const numero2 = parseInt(document.querySelector('input[name="numero2"]').value);
+            const lista = document.querySelector('input[name="lista"]').value.split(',').map(x => parseInt(x.trim()));
+            let resultado;
+
+            switch (algoritmo) {
+                case 'contagem':
+                    resultado = contagem(numero);
+                    break;
+                case 'somatorio':
+                    resultado = somatorio(numero);
+                    break;
+                case 'fibonacci':
+                    resultado = fibonacci(numero);
+                    break;
+                case 'mdc':
+                    resultado = mdc(numero, numero2);
+                    break;
+                case 'primo':
+                    resultado = primo(numero);
+                    break;
+                case 'ordenacao':
+                    resultado = ordenacao(lista);
+                    break;
+            }
+
+            document.querySelector('#resultado').innerHTML = `Resultado: ${resultado}`;
+        }
+
+        function contagem(n) {
+            let resultado = '';
+            for (let i = 1; i <= n; i++) {
+                resultado += i + ' ';
+            }
+            return resultado.trim();
+        }
+
+        function somatorio(n) {
+            let resultado = 0;
+            for (let i = 1; i <= n; i++) {
+                resultado += i;
+            }
+            return resultado;
+        }
+
+        function fibonacci(n) {
+            if (n <=  1) {
+                return n;
+            }
+            let a = 0, b = 1, c;
+            for (let i = 2; i <= n; i++) {
+                c = a + b;
+                a = b;
+                b = c;
+            }
+            return b;
+        }
+    </script>
+</body>
+</html>
